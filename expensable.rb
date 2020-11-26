@@ -5,6 +5,7 @@ require_relative "user_controller"
 require_relative "user"
 require_relative "session"
 require "pry"
+require "terminal-table"
 
 class Expensable
   include Requester
