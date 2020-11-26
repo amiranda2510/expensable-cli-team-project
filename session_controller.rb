@@ -10,4 +10,15 @@ class SessionController
   #     headers: { "Content-Type" => "application/json" }
   #   }
   # end
+
+  # create_ logout
+
+  def self.logout(token)
+    options = { headers: { autorization: "Token token=#{token}" } }
+    response = delete("/logout", options)
+
+    raise Net::HTTPError.new(response.message, response) unless response.success?
+
+    JSON.parse(response.body, symbolize_name: true) if response.body
+  end
 end
