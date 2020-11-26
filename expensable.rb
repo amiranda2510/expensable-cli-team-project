@@ -1,6 +1,8 @@
 # Start here. Happy coding!
 require_relative "requester"
 require_relative "presenter"
+require_relative "user_controller"
+require "httparty"
 
 class Expensable
   include Requester
