@@ -11,8 +11,13 @@ class UserController
       "body": new_user.to_json
     }
     response = post("/signup", request)
+    raise_and_send_response(response)
+    # JSON.parse(response.body, symbolize_names: true)
+  end
 
-    # raise error here
-    JSON.parse(response.body, symbolize_names: true)
+  def self.raise_and_send_response(response)
+    raise Net::HTTPError.new(response.parsed_response["errors"], response) unless response.success?
+
+    JSON.parse(response.body, symbolize_names: true) if response.body
   end
 end

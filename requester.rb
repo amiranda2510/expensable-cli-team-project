@@ -24,16 +24,11 @@ module Requester
 
   def user_form
     # NEEDS VALIDATION
-    print "Email: "
-    email = gets.chomp
-    print "Password: "
-    password = gets.chomp
-    print "First name: "
-    first_name = gets.chomp
-    print "Last name: "
-    last_name = gets.chomp
-    print "Phone: "
-    phone = gets.chomp
+    email = gets_string("Email: ")
+    password = gets_string("Password: ", length: 6)
+    first_name = gets_string("First name:")
+    last_name = gets_string("Last name: ")
+    phone = gets_string("Phone: ")
     {
       email: email,
       password: password,
@@ -41,6 +36,8 @@ module Requester
       last_name: last_name,
       phone: phone
     }
+  end
+
   def login_form
     email = gets_string("Email: ")
     password = gets_string("Password: ")
