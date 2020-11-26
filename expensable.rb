@@ -15,6 +15,9 @@ class Expensable
 
   def initialize
     # initialize
+    @user = nil
+    @categories = nil
+    @incomes = false
   end
 
   def start
