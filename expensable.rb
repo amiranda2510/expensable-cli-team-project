@@ -4,6 +4,7 @@ require_relative "presenter"
 require_relative "user_controller"
 require_relative "user"
 require_relative "session"
+require_relative "menu_expenses"
 require "pry"
 
 class Expensable
@@ -11,6 +12,7 @@ class Expensable
   include Presenter
   include User
   include Session
+  include MenuExpenses
 
   def initialize
     # initialize
