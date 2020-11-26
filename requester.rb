@@ -23,9 +23,9 @@ module Requester
   end
 
   def login_form
-    username = gets_string("username: ")
-    password = gets_string("password: ")
-    { username: username, password: password }
+    email = gets_string("Email: ")
+    password = gets_string("Password: ")
+    { email: email, password: password }
   end
 
   def gets_string(prompt, required: true, length: 0)

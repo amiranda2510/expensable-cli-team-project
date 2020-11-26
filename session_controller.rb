@@ -3,14 +3,13 @@ require "httparty"
 
 class SessionController
   include HTTParty
-  base_uri "https://expensable-api.herokuapp.com/"
+  base_uri "https://expensable-api.herokuapp.com"
 
   def self.login(login_data)
-    {
-      headers: { "Content-Type" => "application/json" },
+    options = {
+      headers: { "Content-Type": "application/json" },
       body: login_data.to_json
     }
+    post("/login", options)
   end
-
-  # response = post("/login", options)
 end
