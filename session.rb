@@ -8,5 +8,8 @@ module Session
     p @user
     # presentar tablas
   end
-  # logout method
+
+  def logout
+    @user = SessionController.logout(@user[:token])
+  end
 end
