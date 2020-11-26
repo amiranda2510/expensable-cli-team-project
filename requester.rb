@@ -21,4 +21,25 @@ module Requester
     end
     input
   end
+
+  def login_form
+    username = gets_string("username: ")
+    password = gets_string("password: ")
+    { username: username, password: password }
+  end
+
+  def gets_string(prompt, required: true, length: 0)
+    print prompt
+    input = gets.chomp.strip
+
+    if required
+      while input.empty? || input.size < length
+        puts "Can't be blank" if input.empty?
+        puts "Minimium length of #{length}" if input.size < length
+        print prompt
+        input = gets.chomp.strip
+      end
+    end
+    input
+  end
 end
