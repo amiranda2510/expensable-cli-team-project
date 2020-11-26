@@ -1,9 +1,14 @@
 require_relative "session_controller"
 
 module Session
-  # LOGIN
+  def login
+    login_data = login_form
 
-  # LOGOUT
+    @user = SessionController.login(login_data)
+    p @user
+    # presentar tablas
+  end
+
   def logout
     @user = SessionController.logout(@user[:token])
   end

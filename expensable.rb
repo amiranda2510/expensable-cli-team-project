@@ -1,10 +1,12 @@
 # Start here. Happy coding!
 require_relative "requester"
 require_relative "presenter"
+require_relative "session"
 
 class Expensable
   include Requester
   include Presenter
+  include Session
 
   def initialize
     # initialize

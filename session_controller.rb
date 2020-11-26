@@ -1,20 +1,22 @@
 require "json"
-require "HTTParty"
+require "httparty"
 
 class SessionController
   include HTTParty
-  base_uri "https://expensable-api.herokuapp.com/"
+  base_uri "https://expensable-api.herokuapp.com"
 
-  # def self.login(_login_data)
-  #   options = {
-  #     headers: { "Content-Type" => "application/json" }
-  #   }
-  # end
+  def self.login(login_data)
+    options = {
+      headers: { "Content-Type": "application/json" },
+      body: login_data.to_json
+    }
+    post("/login", options)
+  end
 
   # create_ logout
 
   def self.logout(token)
-    options = { headers: { autorization: "Token token=#{token}" } }
+    options = { headers: { authorization: "Token token=#{token}" } }
     response = delete("/logout", options)
     raise_and_send_response(response)
   end
