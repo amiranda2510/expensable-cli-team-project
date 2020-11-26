@@ -9,14 +9,21 @@ module Requester
     gets_option(prompt, options)
   end
 
+  def select_menu_expenses_action
+    prompt = "create | show ID | update ID | delete ID
+add-to ID | toggle | next | prev | logout"
+    options = %w[create show ID update ID delete ID add-to ID toggle next prev logout]
+    gets_option(prompt, options)
+  end
+
   def gets_option(prompt, options)
     puts prompt
-    print ">"
+    print "> "
     input = gets.chomp.strip
 
     until options.include?(input)
       puts "Invalid option"
-      print ">"
+      print "> "
       input = gets.chomp.strip
     end
     input
