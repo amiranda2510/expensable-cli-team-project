@@ -16,7 +16,10 @@ class SessionController
   def self.logout(token)
     options = { headers: { autorization: "Token token=#{token}" } }
     response = delete("/logout", options)
+    raise_and_send_response(response)
+  end
 
+  def raise_and_send_response(response)
     raise Net::HTTPError.new(response.message, response) unless response.success?
 
     JSON.parse(response.body, symbolize_name: true) if response.body
