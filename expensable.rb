@@ -6,6 +6,7 @@ require_relative "user"
 require_relative "session"
 require_relative "menu_expenses"
 require "pry"
+require "terminal-table"
 
 class Expensable
   include Requester
@@ -16,6 +17,9 @@ class Expensable
 
   def initialize
     # initialize
+    @user = nil
+    @categories = nil
+    @incomes = false
   end
 
   def start
