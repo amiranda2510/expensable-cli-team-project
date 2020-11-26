@@ -5,7 +5,6 @@ module Session
     login_data = login_form
 
     @user = SessionController.login(login_data)
-    p @user
     # presentar tablas
   end
 
