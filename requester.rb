@@ -22,6 +22,22 @@ module Requester
     input
   end
 
+  def user_form
+    # NEEDS VALIDATION
+    email = gets_string("Email: ")
+    password = gets_string("Password: ", length: 6)
+    first_name = gets_string("First name:")
+    last_name = gets_string("Last name: ")
+    phone = gets_string("Phone: ")
+    {
+      email: email,
+      password: password,
+      first_name: first_name,
+      last_name: last_name,
+      phone: phone
+    }
+  end
+
   def login_form
     email = gets_string("Email: ")
     password = gets_string("Password: ")
