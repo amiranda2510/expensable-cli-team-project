@@ -21,4 +21,25 @@ module Requester
     end
     input
   end
+
+  def user_form
+    # NEEDS VALIDATION
+    print "Email: "
+    email = gets.chomp
+    print "Password: "
+    password = gets.chomp
+    print "First name: "
+    first_name = gets.chomp
+    print "Last name: "
+    last_name = gets.chomp
+    print "Phone: "
+    phone = gets.chomp
+    {
+      email: email,
+      password: password,
+      first_name: first_name,
+      last_name: last_name,
+      phone: phone
+    }
+  end
 end
