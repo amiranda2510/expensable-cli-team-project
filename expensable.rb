@@ -2,11 +2,13 @@
 require_relative "requester"
 require_relative "presenter"
 require_relative "user_controller"
+require_relative "user"
 require "httparty"
 
 class Expensable
   include Requester
   include Presenter
+  include User
 
   def initialize
     # initialize
