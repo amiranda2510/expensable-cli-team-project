@@ -1,7 +1,6 @@
 require "httparty"
 require "json"
 
-
 class UserController
   include HTTParty
   base_uri "https://expensable-api.herokuapp.com"
