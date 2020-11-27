@@ -37,8 +37,7 @@ class TransactionsController
   def self.delete_transaction(user, transaction_info)
     # this method returns nothing nil
     request = {
-      "headers": { "Content-Type": "application/json", "Authorization": "Token token=#{user.token}" },
-      "body": transaction_info.to_json
+      "headers": { "Authorization": "Token token=#{user.token}" }
     }
     transaction_id = transaction_info[:transaction_id]
     category_id = transaction_info[:category_id]

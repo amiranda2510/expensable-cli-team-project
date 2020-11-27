@@ -27,6 +27,14 @@ module Transactions
     TransactionsController.update_transaction(@user, transaction_info)
   end
 
+  def delete_transaction(transaction_id)
+    transaction_info = {
+      transaction_id: transaction_id,
+      category_id: @category_id
+    }
+    TransactionsController.delete_transaction(user, transaction_info)
+  end
+
   # requester
 
   def transaction_form(update_form: false)
