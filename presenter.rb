@@ -14,20 +14,33 @@ module Presenter
     puts "####################################"
   end
 
-  def gets_option(prompt, options)
-    puts prompt
-    print "> "
-    input = gets.chomp.strip
+  # def gets_option(prompt, options)
+  #   puts prompt
+  #   print "> "
+  #   input = gets.chomp.strip.split
+  #   comando = input[0]
+  #   until options.include?(comando)
+  #     puts "Invalid option"
+  #     print "> "
+  #     input = gets.chomp.strip
+  #   end
+  #   input
+  # end
 
-    until options.include?(input)
-      puts "Invalid option"
-      print "> "
-      input = gets.chomp.strip
-    end
-    input
-  end
+  # def gets_option_two(prompt, options)
+  #   puts prompt
+  #   print "> "
+  #   input = gets.chomp.strip.split(" ")
+  #   comando = input[0]
+  #   until options.include?(comando)
+  #     puts "Invalid option"
+  #     print "> "
+  #     input = gets.chomp.strip
+  #   end
+  #   input
+  # end
 
-  def print_welcome_messsage(name, lastname)
+  def print_login_message(name, lastname)
     puts "Welcome to Expensable #{name} #{lastname}"
   end
   # PRINT TABLES CATEGORIES

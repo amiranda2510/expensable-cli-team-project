@@ -47,6 +47,20 @@ module Requester
     { email: email, password: password }
   end
 
+  def category_form
+    name = gets_string("Name: ")
+    transaction_type = gets_string("Transaction type: ")
+    { name: name, transaction_type: transaction_type }
+    # agregar validacion para transaction type
+  end
+
+  def transaction_form
+    amount = gets_string("Amount: ")
+    date = gets_string("Date: ")
+    notes = gets_string("Notes: ")
+    { amount: amount, date: date, notes: notes }
+  end
+
   def gets_string(prompt, required: true, length: 0)
     print prompt
     input = gets.chomp.strip

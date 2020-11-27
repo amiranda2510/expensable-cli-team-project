@@ -3,7 +3,7 @@ require_relative "presenter"
 require_relative "categories_controller"
 
 module Categories
-  def expenses_menu
+  def categories
     load_categories
     print_categories
     action, id = select_menu_expenses_action
@@ -23,12 +23,10 @@ module Categories
     end
   end
 
-  def find_by_id(id)
-    # para encontrar el category por ID
-  end
-
   def create_category
-    # para crear un nuevo category
+    data = category_form
+
+    @categories << CategoriesController.create(@user[:token], data)
   end
 
   def show_category(_id)
@@ -37,7 +35,9 @@ module Categories
   end
 
   def update_category(id)
-    # para actualizar una categoria
+    data = category_form
+    category_index = @categories.index { |category| id == category[:id] }
+    @categories[category_index] = CategoriesController.update(@user[:token], data, id)
   end
 
   def delete_category(id)
