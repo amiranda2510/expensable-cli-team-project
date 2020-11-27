@@ -15,6 +15,7 @@ class Expensable
   include User
   include Session
   include ExpensesMenu
+  include Transactions
 
   def initialize
     # initialize
