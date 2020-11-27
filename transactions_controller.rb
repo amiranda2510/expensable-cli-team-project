@@ -5,7 +5,7 @@ class TransactionsController
   require HTTParty
   base_uri "https://expensable-api.herokuapp.com"
 
-  def self.add_transaction(user, transaction_info)
+  def self.create(user, transaction_info)
     # created transaction hash is returned
     request = {
       "headers": { "Content-Type": "application/json", "Authorization": "Token token=#{user.token}" },
@@ -19,7 +19,7 @@ class TransactionsController
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def self.update_transaction(user, transaction_info)
+  def self.update(user, transaction_info)
     # updated transaction hash is returned
     request = {
       "headers": { "Content-Type": "application/json", "Authorization": "Token token=#{user.token}" },
@@ -34,7 +34,7 @@ class TransactionsController
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def self.delete_transaction(user, transaction_info)
+  def self.destroy(user, transaction_info)
     # this method returns nothing nil
     request = {
       "headers": { "Authorization": "Token token=#{user.token}" }

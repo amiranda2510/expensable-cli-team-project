@@ -18,13 +18,13 @@ module Transactions
 
   def add_transaction
     transaction_info = transaction_form
-    TransactionsController.add_transaction(@user, transaction_info)
+    TransactionsController.create(@user, transaction_info)
   end
 
   def update_transaction(transaction_id)
     transaction_info = transaction_form(update_form: true)
     transaction_info[:transaction_id] = transaction_id
-    TransactionsController.update_transaction(@user, transaction_info)
+    TransactionsController.update(@user, transaction_info)
   end
 
   def delete_transaction(transaction_id)
@@ -32,7 +32,7 @@ module Transactions
       transaction_id: transaction_id,
       category_id: @category_id
     }
-    TransactionsController.delete_transaction(user, transaction_info)
+    TransactionsController.destroy(user, transaction_info)
   end
 
   # requester
