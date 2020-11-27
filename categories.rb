@@ -16,7 +16,7 @@ module Categories
       when "add-to" then add_to(id.to_i)
       when "toggle" then toggle
       when "next" then next_table
-      when "prev" then prev
+      when "prev" then prev_table
       end
       print_categories
       action = select_menu_expenses_action
@@ -53,11 +53,11 @@ module Categories
   end
 
   def next_table
-    # para pasar a la siguiente tabla
+    @date = @date.next_month
   end
 
   def prev_table
-    # para ver tabal previa
+    @date = @date.prev_month
   end
 
   # Load categories

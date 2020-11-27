@@ -26,8 +26,10 @@ module Presenter
   # PRINT TABLES CATEGORIES
 
   def print_categories
+    month = @date.strftime("%B")
+    year = @date.year
     table = Terminal::Table.new
-    table.title = @incomes ? "Incomes\nNovember 2020" : "Expenses\nNovember 2020"
+    table.title = @incomes ? "Incomes\n#{month} #{year}" : "Expenses\n#{month} #{year}"
     table.headings = %w[ID Category Total]
     table.rows = select_table.map do |category|
       [
