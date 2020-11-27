@@ -4,6 +4,7 @@ require_relative "presenter"
 require_relative "user_controller"
 require_relative "user"
 require_relative "session"
+require_relative "expenses_menu"
 require "pry"
 require "terminal-table"
 
@@ -12,9 +13,13 @@ class Expensable
   include Presenter
   include User
   include Session
+  include ExpensesMenu
 
   def initialize
     # initialize
+    @user = nil
+    @categories = nil
+    @incomes = false
   end
 
   def start

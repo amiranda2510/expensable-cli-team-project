@@ -10,7 +10,8 @@ class SessionController
       headers: { "Content-Type": "application/json" },
       body: login_data.to_json
     }
-    post("/login", options)
+    response = post("/login", options)
+    raise_and_send_response(response)
   end
 
   # create_ logout
@@ -21,7 +22,7 @@ class SessionController
     raise_and_send_response(response)
   end
 
-  def raise_and_send_response(response)
+  def self.raise_and_send_response(response)
     raise Net::HTTPError.new(response.message, response) unless response.success?
 
     JSON.parse(response.body, symbolize_names: true) if response.body
