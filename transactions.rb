@@ -22,9 +22,9 @@ module Transactions
   end
 
   def update_transaction(transaction_id)
-    # transaction_info = transaction_form(update_form: true)
-    # transaction_info[:transaction_id] = transaction_id
-    # TransactionsController.update_transaction(@user, transaction_info)
+    transaction_info = transaction_form(update_form: true)
+    transaction_info[:transaction_id] = transaction_id
+    TransactionsController.update_transaction(@user, transaction_info)
   end
 
   # requester
