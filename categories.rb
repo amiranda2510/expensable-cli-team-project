@@ -7,15 +7,19 @@ module Categories
     load_categories
     print_categories
     action = select_menu_expenses_action
-    case action
-    when "create" then create_category
-    when "show" then show_category(id.to_i)
-    when "update" then update_category(id.to_i)
-    when "delete" then delete_category(id.to_i)
-    when "add-to" then add_to(id.to_i)
-    when "toggle" then toggle
-    when "next" then next_table
-    when "prev" then prev
+    until action == "logout"
+      case action
+      when "create" then create_category
+      when "show" then show_category(id.to_i)
+      when "update" then update_category(id.to_i)
+      when "delete" then delete_category(id.to_i)
+      when "add-to" then add_to(id.to_i)
+      when "toggle" then toggle
+      when "next" then next_table
+      when "prev" then prev
+      end
+      print_categories
+      action = select_menu_expenses_action
     end
   end
 
@@ -45,7 +49,7 @@ module Categories
   end
 
   def toggle
-    # para pasar de expenses a income
+    @incomes = !@incomes
   end
 
   def next_table
