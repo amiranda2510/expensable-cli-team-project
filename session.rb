@@ -1,8 +1,8 @@
 require_relative "session_controller"
-require_relative "expenses_menu"
+require_relative "categories"
 
 module Session
-  include ExpensesMenu
+  include Categories
 
   def login
     login_data = login_form

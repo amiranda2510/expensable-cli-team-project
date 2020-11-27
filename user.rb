@@ -1,7 +1,7 @@
-require_relative "expenses_menu"
+require_relative "categories"
 
 module User
-  include ExpensesMenu
+  include Categories
 
   def create_user
     data = user_form # => {}

@@ -1,7 +1,8 @@
 require_relative "requester"
 require_relative "presenter"
+require_relative "categories_controller"
 
-module ExpensesMenu
+module Categories
   def expenses_menu
     print_categories
     action = select_menu_expenses_action
@@ -50,7 +51,12 @@ module ExpensesMenu
     # para pasar a la siguiente tabla
   end
 
-  def prev
+  def prev_table
     # para ver tabal previa
+  end
+
+  # Load categories
+  def load_categories
+    @categories = CategoriesController.index(@user[:token])
   end
 end
