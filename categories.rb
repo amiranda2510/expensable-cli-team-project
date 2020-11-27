@@ -6,7 +6,7 @@ module Categories
   def expenses_menu
     load_categories
     print_categories
-    action = select_menu_expenses_action
+    action, id = select_menu_expenses_action
     until action == "logout"
       case action
       when "create" then create_category
@@ -19,7 +19,7 @@ module Categories
       when "prev" then prev_table
       end
       print_categories
-      action = select_menu_expenses_action
+      action, id = select_menu_expenses_action
     end
   end
 
@@ -41,7 +41,8 @@ module Categories
   end
 
   def delete_category(id)
-    # para borrar una categoria
+    @categories.reject! { |category| category[:id] == id }
+    CategoriesController.destroy(id, @user[:token])
   end
 
   def add_to(id)
