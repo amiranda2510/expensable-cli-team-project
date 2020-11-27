@@ -1,13 +1,39 @@
-require "json"
 require "httparty"
+require "json"
 
 class CategoriesController
   include HTTParty
   base_uri "https://expensable-api.herokuapp.com"
 
-  def self.categories(token)
+  def self.category(token, id)
     options = { headers: { authorization: "Token token=#{token}" } }
-    response = get("/id", options)
+    response = get("/categories/#{id}", options)
+    raise_and_send_response(response)
+  end
+
+  def self.index(token)
+    options = {
+      headers: { authorization: "Token token=#{token}" }
+    }
+    response = get("/categories", options)
+    raise_and_send_response(response)
+  end
+
+  def self.create(token, data)
+    options = {
+      headers: { "Content-Type": "application/json", "Authorization": "Token token=#{token}" },
+      body: data.to_json
+    }
+    response = post("/categories", options)
+    raise_and_send_response(response)
+  end
+
+  def self.update(token, data, id)
+    options = {
+      headers: { "Content-Type": "application/json", "Authorization": "Token token=#{token}" },
+      body: data.to_json
+    }
+    response = patch("/categories/#{id}", options)
     raise_and_send_response(response)
   end
 

@@ -12,7 +12,7 @@ module Requester
   def select_menu_expenses_action
     prompt = "create | show ID | update ID | delete ID
     add-to ID | toggle | next | prev | logout"
-    options = %w[create show ID update ID delete ID add-to ID toggle next prev logout]
+    options = %w[create show update delete add-to toggle next prev logout]
     gets_option(prompt, options)
   end
 
@@ -43,6 +43,20 @@ module Requester
     email = gets_string("Email: ")
     password = gets_string("Password: ")
     { email: email, password: password }
+  end
+
+  def category_form
+    name = gets_string("Name: ")
+    transaction_type = gets_string("Transaction type: ")
+    { name: name, transaction_type: transaction_type }
+    # agregar validacion para transaction type
+  end
+
+  def transaction_form
+    amount = gets_string("Amount: ")
+    date = gets_string("Date: ")
+    notes = gets_string("Notes: ")
+    { amount: amount, date: date, notes: notes }
   end
 
   def gets_string(prompt, required: true, length: 0)
