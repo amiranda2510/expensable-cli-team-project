@@ -4,6 +4,7 @@ require_relative "categories_controller"
 
 module Categories
   def expenses_menu
+    load_categories
     print_categories
     action = select_menu_expenses_action
     case action

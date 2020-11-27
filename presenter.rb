@@ -49,10 +49,7 @@ module Presenter
   end
 
   def select_table
-    # simula el request categories.index
-    file = File.read("./categories.json")
-    new_categories = JSON.parse(file, symbolize_names: true)
-    new_categories = group_by_categories(new_categories)
+    new_categories = group_by_categories(@categories)
     if @incomes
       new_categories[:incomes]
     else
