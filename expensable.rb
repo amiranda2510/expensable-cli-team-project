@@ -26,14 +26,14 @@ class Expensable
     # start
 
     print_welcome
-    action = select_main_menu_action
+    action, = select_main_menu_action
     until action == "exit"
       case action
       when "login" then login
       when "create_user" then create_user
       end
       print_welcome
-      action = select_main_menu_action
+      action, = select_main_menu_action
     end
   end
 end

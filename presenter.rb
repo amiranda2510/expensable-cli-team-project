@@ -10,15 +10,28 @@ module Presenter
   def gets_option(prompt, options)
     puts prompt
     print "> "
-    input = gets.chomp.strip
-
-    until options.include?(input)
+    input = gets.chomp.strip.split
+    comando = input[0]
+    until options.include?(comando)
       puts "Invalid option"
       print "> "
       input = gets.chomp.strip
     end
     input
   end
+
+  # def gets_option_two(prompt, options)
+  #   puts prompt
+  #   print "> "
+  #   input = gets.chomp.strip.split(" ")
+  #   comando = input[0]
+  #   until options.include?(comando)
+  #     puts "Invalid option"
+  #     print "> "
+  #     input = gets.chomp.strip
+  #   end
+  #   input
+  # end
 
   def print_welcome_messsage(name, lastname)
     puts "Welcome to Expensable #{name} #{lastname}"
@@ -29,7 +42,7 @@ module Presenter
     table = Terminal::Table.new
     table.title = @incomes ? "Incomes\nNovember 2020" : "Expenses\nNovember 2020"
     table.headings = %w[ID Category Total]
-    table.rows = @select_table.map do |category|
+    table.rows = select_table.map do |category|
       [
         category[:id],
         category[:name],
