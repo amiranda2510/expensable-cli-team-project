@@ -6,6 +6,7 @@ module Requester
   def select_main_menu_action
     prompt = "login | create_user | exit"
     options = %w[login create_user exit]
+    # p gets_option(prompt, options)
     gets_option(prompt, options)
   end
 
@@ -13,6 +14,7 @@ module Requester
     prompt = "create | show ID | update ID | delete ID
     add-to ID | toggle | next | prev | logout"
     options = %w[create show update delete add-to toggle next prev logout]
+    # p gets_option(prompt, options)
     gets_option(prompt, options)
   end
 
@@ -27,7 +29,7 @@ module Requester
     # NEEDS VALIDATION
     email = gets_string("Email: ")
     password = gets_string("Password: ", length: 6)
-    first_name = gets_string("First name:")
+    first_name = gets_string("First name: ")
     last_name = gets_string("Last name: ")
     phone = gets_string("Phone: ")
     {
@@ -69,6 +71,22 @@ module Requester
         puts "Minimium length of #{length}" if input.size < length
         print prompt
         input = gets.chomp.strip
+      end
+    end
+    input
+  end
+
+  def gets_option(prompt, options, required: true)
+    puts prompt
+    print "> "
+    input = gets.chomp.split.map(&:strip)
+    comand = input[0]
+    if required || !input.empty?
+      until options.include? comand
+        puts "Invalid option"
+        print "> "
+        input = gets.chomp.split.map(&:strip)
+        comand = input[0]
       end
     end
     input

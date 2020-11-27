@@ -7,7 +7,7 @@ require_relative "session"
 require_relative "categories"
 require "pry"
 require "terminal-table"
-
+require "date"
 class Expensable
   include Requester
   include Presenter
@@ -20,6 +20,7 @@ class Expensable
     @user = nil
     @categories = nil
     @incomes = false
+    @date = DateTime.now
   end
 
   def start
@@ -35,6 +36,7 @@ class Expensable
       print_welcome
       action, = select_main_menu_action
     end
+    print_exit
   end
 end
 
