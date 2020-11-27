@@ -1,8 +1,8 @@
 require_relative "requester"
 require_relative "presenter"
 
-module MenuExpenses
-  def menu_expenses
+module ExpensesMenu
+  def expenses_menu
     print_categories
     action = select_menu_expenses_action
     case action
