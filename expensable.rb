@@ -5,6 +5,7 @@ require_relative "user_controller"
 require_relative "user"
 require_relative "session"
 require_relative "expenses_menu"
+require_relative "transactions"
 require "pry"
 require "terminal-table"
 
