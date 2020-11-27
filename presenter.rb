@@ -7,7 +7,7 @@ module Presenter
 
   def print_category_table(category, date = DateTime.now)
     table = Terminal::Table.new
-    table.title = "#{category[:name]}\n#{date.strftime('%B %Y')}"
+    table.title = "#{category[:name]}\n#{date.strftime('%B %Y')}" # => Category/nNovember 
     table.headings = %w[ID Date Amount Notes]
     rows = []
     category[:transactions].each do |transaction|
