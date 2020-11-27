@@ -1,15 +1,15 @@
 require_relative "session_controller"
-require_relative "expenses_menu"
+require_relative "categories"
 
 module Session
-  include ExpensesMenu
+  include Categories
 
   def login
     login_data = login_form
 
     @user = SessionController.login(login_data)
     print_welcome_messsage(@user[:first_name], @user[:last_name])
-    expenses_menu
+    categories
   end
 
   def logout

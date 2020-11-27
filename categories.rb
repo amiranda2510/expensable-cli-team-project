@@ -1,8 +1,11 @@
 require_relative "requester"
 require_relative "presenter"
+require_relative "categories_controller"
 
-module ExpensesMenu
-  def expenses_menu
+module Categories
+  include CategoriesController
+
+  def categories
     print_categories
     action = select_menu_expenses_action
     case action
