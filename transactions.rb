@@ -17,17 +17,17 @@ module Transactions
   end
 
   def add_transaction
-    # transaction_info = transaction_form
-    # TransactionsController.add_transaction(@user, transaction_info)
+    transaction_info = transaction_form
+    TransactionsController.add_transaction(@user, transaction_info)
   end
 
   # requester
 
   def transaction_form
     amount = gets_string("Amount: ")
-    date = gets_string("Date: ")
+    date = gets_string("Date: ")  # NEEDS validation for date
     notes = gets_string("Notes: ", required: false)
 
-    { amount: amount, date: date, notes: notes }
+    { amount: amount, date: date, notes: notes, category_id: @category_id } # NEEDS to create @category_id somewhere
   end
 end
