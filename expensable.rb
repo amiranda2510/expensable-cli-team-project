@@ -35,7 +35,7 @@ class Expensable
         when "create_user" then create_user
         end
       rescue Net::HTTPError => e
-        puts "\n#{e}\n\n"
+        puts "\n\n#{e}\n\n"
       end
       print_welcome
       action, = select_main_menu_action

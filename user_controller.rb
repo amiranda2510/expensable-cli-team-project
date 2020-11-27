@@ -15,9 +15,9 @@ class UserController
   end
 
   def self.raise_and_send_response(response)
-    error_message = JSON.parse(response.body, symbolize_names: true)[:errors].join
-    raise Net::HTTPError.new(error_message, response) unless response.success?
+    send_response = JSON.parse(response.body, symbolize_names: true)
+    raise Net::HTTPError.new(send_response[:errors].join, response) unless response.success?
 
-    JSON.parse(response.body, symbolize_names: true) if response.body
+    send_response
   end
 end
