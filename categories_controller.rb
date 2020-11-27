@@ -14,6 +14,16 @@ class CategoriesController
     raise_and_send_response(response)
   end
 
+  # delete method
+
+  def self.destroy(id, token)
+    options = {
+      headers: { authorization: "Token token=#{token}" }
+    }
+    response = delete("/categories/#{id}", options)
+    raise_and_send_response(response)
+  end
+
   def self.raise_and_send_response(response)
     raise Net::HTTPError.new(response.message, response) unless response.success?
 

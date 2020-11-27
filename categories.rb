@@ -6,7 +6,7 @@ module Categories
   def expenses_menu
     load_categories
     print_categories
-    action = select_menu_expenses_action
+    action, id = select_menu_expenses_action
     until action == "logout"
       case action
       when "create" then create_category
@@ -16,10 +16,10 @@ module Categories
       when "add-to" then add_to(id.to_i)
       when "toggle" then toggle
       when "next" then next_table
-      when "prev" then prev
+      when "prev" then prev_table
       end
       print_categories
-      action = select_menu_expenses_action
+      action, id = select_menu_expenses_action
     end
   end
 
@@ -41,7 +41,8 @@ module Categories
   end
 
   def delete_category(id)
-    # para borrar una categoria
+    @categories.reject! { |category| category[:id] == id }
+    CategoriesController.destroy(id, @user[:token])
   end
 
   def add_to(id)
@@ -53,11 +54,11 @@ module Categories
   end
 
   def next_table
-    # para pasar a la siguiente tabla
+    @date = @date.next_month
   end
 
   def prev_table
-    # para ver tabal previa
+    @date = @date.prev_month
   end
 
   # Load categories

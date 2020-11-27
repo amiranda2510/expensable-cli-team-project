@@ -1,9 +1,16 @@
 require "terminal-table"
+require "date"
 
 module Presenter
   def print_welcome
     puts "####################################"
     puts "#       Welcome to Expensable      #"
+    puts "####################################"
+  end
+
+  def print_exit
+    puts "####################################"
+    puts "#    Thanks for using Expensable   #"
     puts "####################################"
   end
 
@@ -26,8 +33,10 @@ module Presenter
   # PRINT TABLES CATEGORIES
 
   def print_categories
+    month = @date.strftime("%B")
+    year = @date.year
     table = Terminal::Table.new
-    table.title = @incomes ? "Incomes\nNovember 2020" : "Expenses\nNovember 2020"
+    table.title = @incomes ? "Incomes\n#{month} #{year}" : "Expenses\n#{month} #{year}"
     table.headings = %w[ID Category Total]
     table.rows = select_table.map do |category|
       [
@@ -50,6 +59,7 @@ module Presenter
 
   def select_table
     new_categories = group_by_categories(@categories)
+    # {incomes:[list_categories], expenses:[list_categories]}
     if @incomes
       new_categories[:incomes]
     else
@@ -59,7 +69,12 @@ module Presenter
 
   def sum_amount_of_category(category)
     sum = 0
-    category.each { |value| sum += value[:amount] }
+    month = @date.month
+    year = @date.year
+    category.each do |value|
+      date_category = DateTime.parse(value[:date])
+      sum += value[:amount] if date_category.month == month && date_category.year == year
+    end
     sum
   end
 
