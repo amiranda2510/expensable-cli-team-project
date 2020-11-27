@@ -8,6 +8,12 @@ module Presenter
     puts "####################################"
   end
 
+  def print_exit
+    puts "####################################"
+    puts "#    Thanks for using Expensable   #"
+    puts "####################################"
+  end
+
   def gets_option(prompt, options)
     puts prompt
     print "> "

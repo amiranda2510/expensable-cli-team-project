@@ -35,6 +35,7 @@ class Expensable
       print_welcome
       action, _id = select_main_menu_action
     end
+    print_exit
   end
 end
 

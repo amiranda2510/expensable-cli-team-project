@@ -66,12 +66,13 @@ module Requester
     puts prompt
     print "> "
     input = gets.chomp.split.map(&:strip)
-
-    if !required && input.empty?
-      until options.include? input
-        puts "Invalide option"
+    comand = input[0]
+    if required || !input.empty?
+      until options.include? comand
+        puts "Invalid option"
         print "> "
-        input = gets.chomp.strip.map(&:strip)
+        input = gets.chomp.split.map(&:strip)
+        comand = input[0]
       end
     end
     input
