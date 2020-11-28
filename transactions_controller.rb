@@ -2,13 +2,13 @@ require "httparty"
 require "json"
 
 class TransactionsController
-  require HTTParty
+  include HTTParty
   base_uri "https://expensable-api.herokuapp.com"
 
   def self.create(user, transaction_info)
     # created transaction hash is returned
     request = {
-      "headers": { "Content-Type": "application/json", "Authorization": "Token token=#{user.token}" },
+      "headers": { "Content-Type": "application/json", "Authorization": "Token token=#{user[:token]}" },
       "body": transaction_info.to_json
     }
     category_id = transaction_info[:category_id]
@@ -22,7 +22,7 @@ class TransactionsController
   def self.update(user, transaction_info)
     # updated transaction hash is returned
     request = {
-      "headers": { "Content-Type": "application/json", "Authorization": "Token token=#{user.token}" },
+      "headers": { "Content-Type": "application/json", "Authorization": "Token token=#{user[:token]}" },
       "body": transaction_info.to_json
     }
     transaction_id = transaction_info[:transaction_id]
@@ -37,7 +37,7 @@ class TransactionsController
   def self.destroy(user, transaction_info)
     # this method returns nothing nil
     request = {
-      "headers": { "Authorization": "Token token=#{user.token}" }
+      "headers": { "Authorization": "Token token=#{user[:token]}" }
     }
     transaction_id = transaction_info[:transaction_id]
     category_id = transaction_info[:category_id]

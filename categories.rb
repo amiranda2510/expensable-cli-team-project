@@ -29,9 +29,17 @@ module Categories
     @categories << CategoriesController.create(@user[:token], data)
   end
 
-  def show_category(_id)
-    # para mostrar la tabla de category
-    select_menu_show_category
+  def show_category(id)
+    # this is created so some methods in Transactions and TransactionsController have access to the category id
+    @category_id = id
+    loop do
+      # NEEDS rescue if category couldn't be found
+      print_transactions_table(id, @date)
+      input = select_transaction_option
+      break if input.first == "back"
+
+      execute_option(*input) # input may be [option] or [option, id]
+    end
   end
 
   def update_category(id)

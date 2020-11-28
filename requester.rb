@@ -18,9 +18,9 @@ module Requester
     gets_option(prompt, options)
   end
 
-  def select_menu_show_category
-    prompt = "add | update ID | delete ID
-    next | prev | back"
+  def select_transaction_option
+    prompt = "add | update ID | delete ID\n"\
+             "next | prev | back"
     options = %w[add update ID delete ID next prev back]
     gets_option(prompt, options)
   end

@@ -1,7 +1,8 @@
 require_relative "transactions_controller"
 
 module Transactions
-  def print_transactions_table(category, date = DateTime.now)
+  def print_transactions_table(id, date = DateTime.now)
+    category = CategoriesController.category(@user[:token], id)
     table = Terminal::Table.new
     table.title = "#{category[:name]}\n#{date.strftime('%B %Y')}" # => Category/nNovember
     table.headings = %w[ID Date Amount Notes]
@@ -14,6 +15,16 @@ module Transactions
     end
     table.rows = rows
     puts table
+  end
+
+  def execute_option(option, id = nil)
+    case option
+    when "add" then add_transaction
+    when "update" then update_transaction id # may need to rescue for non-existing transaction id
+    when "delete" then delete_transaction id # may need to rescue for non-existing transaction id
+    when "next" then next_table
+    when "prev" then prev_table
+    end
   end
 
   def add_transaction
@@ -38,7 +49,7 @@ module Transactions
   # requester
 
   def transaction_form(update_form: false)
-    amount = update_form ? gets_string("Amount: ", required: false) : get_string("Amount: ")
+    amount = update_form ? gets_string("Amount: ", required: false) : gets_string("Amount: ")
     # NEEDS validation for date
     date = update_form ? gets_string("Amount: ", required: false) : gets_string("Date: ")
     notes = gets_string("Notes: ", required: false)
