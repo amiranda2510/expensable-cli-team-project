@@ -8,15 +8,19 @@ module Categories
     print_categories
     action, id = select_menu_expenses_action
     until action == "logout"
-      case action
-      when "create" then create_category
-      when "show" then show_category(id.to_i)
-      when "update" then update_category(id.to_i)
-      when "delete" then delete_category(id.to_i)
-      when "add-to" then add_to(id.to_i)
-      when "toggle" then toggle
-      when "next" then next_table
-      when "prev" then prev_table
+      begin
+        case action
+        when "create" then create_category
+        when "show" then show_category(id.to_i)
+        when "update" then update_category(id.to_i)
+        when "delete" then delete_category(id.to_i)
+        when "add-to" then add_to(id.to_i)
+        when "toggle" then toggle
+        when "next" then next_table
+        when "prev" then prev_table
+        end
+      rescue Net::HTTPError => e
+        puts "\n\n#{e}\n\n"
       end
       print_categories
       action, id = select_menu_expenses_action
