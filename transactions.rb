@@ -43,11 +43,7 @@ module Transactions
   end
 
   def delete_transaction(transaction_id)
-    transaction_info = {
-      transaction_id: transaction_id,
-      category_id: @category_id
-    }
-    TransactionsController.destroy(user, transaction_info)
+    TransactionsController.destroy(@user, @category_id, transaction_id)
   end
 
   # requester
@@ -55,7 +51,7 @@ module Transactions
   def transaction_form(update_form: false)
     amount = update_form ? gets_string("Amount: ", required: false) : gets_string("Amount: ")
     # NEEDS validation for date
-    date = update_form ? gets_string("Amount: ", required: false) : gets_string("Date: ")
+    date = update_form ? gets_string("Date: ", required: false) : gets_string("Date: ")
     notes = gets_string("Notes: ", required: false)
 
     transaction_info = {}
