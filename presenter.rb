@@ -15,6 +15,7 @@ module Presenter
   end
 
   def print_login_message(name, lastname)
+    puts
     puts "Welcome to Expensable #{name} #{lastname}"
   end
   # PRINT TABLES CATEGORIES
