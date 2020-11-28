@@ -25,32 +25,6 @@ module Presenter
          "####################################".custom_colorize
   end
 
-  # def gets_option(prompt, options)
-  #   puts prompt
-  #   print "> "
-  #   input = gets.chomp.strip.split
-  #   comando = input[0]
-  #   until options.include?(comando)
-  #     puts "Invalid option"
-  #     print "> "
-  #     input = gets.chomp.strip
-  #   end
-  #   input
-  # end
-
-  # def gets_option_two(prompt, options)
-  #   puts prompt
-  #   print "> "
-  #   input = gets.chomp.strip.split(" ")
-  #   comando = input[0]
-  #   until options.include?(comando)
-  #     puts "Invalid option"
-  #     print "> "
-  #     input = gets.chomp.strip
-  #   end
-  #   input
-  # end
-
   def print_login_message(name, lastname)
     puts "Welcome to Expensable #{name} #{lastname}".custom_colorize
   end

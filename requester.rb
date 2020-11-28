@@ -15,7 +15,6 @@ module Requester
     prompt = "create | show ID | update ID | delete ID
     add-to ID | toggle | next | prev | logout"
     options = %w[create show update delete add-to toggle next prev logout]
-    # p gets_option(prompt, options)
     gets_option(prompt, options)
   end
 
@@ -28,11 +27,11 @@ module Requester
 
   def user_form
     # NEEDS VALIDATION
-    email = gets_string("Email: ")
-    password = gets_string("Password: ", length: 8)
-    first_name = gets_string("First name: ")
-    last_name = gets_string("Last name: ")
-    phone = gets_string("Phone: ")
+    email = gets_email("Email: ")
+    password = gets_string("Password: ", length: 6)
+    first_name = gets_string("First name: ", required: false)
+    last_name = gets_string("Last name: ", required: false)
+    phone = gets_phone("Phone: ")
     {
       email: email,
       password: password,
@@ -85,7 +84,7 @@ module Requester
       while input.empty? || regex_email.match(input).nil?
         puts
         puts "Can't be blank".red if input.empty?
-        puts "Incorrect format email /user@mail.com/ ".red if regex_email.match(input).nil?
+        puts "Incorrect format email: user@mail.com".red if regex_email.match(input).nil?
         print prompt.custom_colorize
         input = gets.chomp.strip
       end
@@ -104,6 +103,23 @@ module Requester
         print prompt.custom_colorize
         input = $stdin.noecho(&:gets).chomp.strip
       end
+    end
+    input
+  end
+
+  def gets_phone(prompt, required: true)
+    print prompt
+    input = gets.chomp.strip
+    regex_phone = /([+\d{2}]{3})?\s?(9\d{8})/ # 975963852 +51963852741 +51 963852741
+    if required || !input.empty?
+      while input.empty? || regex_phone.match(input).nil?
+        puts
+        puts "Can't be blank" if input.empty?
+        puts "Required format: +51 999888777 or 999888777" if regex_phone.match(input).nil?
+        print prompt
+        input = gets.chomp.strip
+      end
+      input = regex_phone.match(input).to_s
     end
     input
   end

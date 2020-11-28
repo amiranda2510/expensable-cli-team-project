@@ -4,9 +4,8 @@ require_relative "presenter"
 require_relative "user_controller"
 require_relative "user"
 require_relative "session"
-# require_relative "expenses_menu" <- says file doesn't exist
-require_relative "transactions"
 require_relative "categories"
+require_relative "transactions"
 require "pry"
 require "terminal-table"
 require "date"
@@ -15,7 +14,6 @@ class Expensable
   include Presenter
   include User
   include Session
-  # include ExpensesMenu <- says doesn't exist
   include Transactions
   include Categories
 
