@@ -50,7 +50,6 @@ module Categories
     transaction_info[:category_id] = id
     category_index = @categories.index { |category| id == category[:id] }
     @categories[category_index][:transactions] << TransactionsController.create(@user, transaction_info)
-    p @categories[category_index]
   end
 
   def toggle
