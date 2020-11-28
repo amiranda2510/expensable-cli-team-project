@@ -15,7 +15,6 @@ module Requester
     prompt = "create | show ID | update ID | delete ID
     add-to ID | toggle | next | prev | logout"
     options = %w[create show update delete add-to toggle next prev logout]
-    # p gets_option(prompt, options)
     gets_option(prompt, options)
   end
 
