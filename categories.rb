@@ -46,7 +46,11 @@ module Categories
   end
 
   def add_to(id)
-    # para anadir transaction a un category
+    transaction_info = transaction_form
+    transaction_info[:category_id] = id
+    category_index = @categories.index { |category| id == category[:id] }
+    @categories[category_index][:transactions] << TransactionsController.create(@user, transaction_info)
+    p @categories[category_index]
   end
 
   def toggle
