@@ -1,22 +1,32 @@
 require "terminal-table"
 require "date"
+require "colorize"
+
+class String
+  def custom_colorize
+    gsub!(/[|>:+#-]/, &:cyan)
+    gsub!(/ID|/, &:yellow)
+    gsub!(/\b(delete|for|to)\b/, &:light_magenta)
+    gsub!(/exit|\b\w*(?=\()|(?<![\[;])\d*(?![m;])/, &:red) # => any number not inside an enclosing eg \e[;0m0m;2]
+    self
+  end
+end
 
 module Presenter
   def print_welcome
-    puts "####################################"
-    puts "#       Welcome to Expensable      #"
-    puts "####################################"
+    puts "####################################\n"\
+         "#       Welcome to Expensable      #\n"\
+         "####################################".custom_colorize
   end
 
   def print_exit
-    puts "####################################"
-    puts "#    Thanks for using Expensable   #"
-    puts "####################################"
+    puts "####################################\n"\
+         "#    Thanks for using Expensable   #\n"\
+         "####################################".custom_colorize
   end
 
   def print_login_message(name, lastname)
-    puts
-    puts "Welcome to Expensable #{name} #{lastname}"
+    puts "Welcome to Expensable #{name} #{lastname}".custom_colorize
   end
   # PRINT TABLES CATEGORIES
 
@@ -33,7 +43,7 @@ module Presenter
         sum_amount_of_category(category[:transactions])
       ]
     end
-    puts table
+    puts table.to_s.custom_colorize
   end
 
   def group_by_categories(categories)

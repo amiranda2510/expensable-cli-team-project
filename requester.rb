@@ -18,9 +18,9 @@ module Requester
     gets_option(prompt, options)
   end
 
-  def select_menu_show_category
-    prompt = "add | update ID | delete ID
-    next | prev | back"
+  def select_transaction_option
+    prompt = "add | update ID | delete ID\n"\
+             "next | prev | back"
     options = %w[add update ID delete ID next prev back]
     gets_option(prompt, options)
   end
@@ -62,14 +62,14 @@ module Requester
   end
 
   def gets_string(prompt, required: true, length: 0)
-    print prompt
+    print prompt.custom_colorize
     input = gets.chomp.strip
 
     if required
       while input.empty? || input.size < length
-        puts "Can't be blank" if input.empty?
-        puts "Minimium length of #{length}" if input.size < length
-        print prompt
+        puts "Can't be blank".red if input.empty?
+        puts "Minimium length of #{length}".red if input.size < length
+        print prompt.custom_colorize
         input = gets.chomp.strip
       end
     end
@@ -77,15 +77,15 @@ module Requester
   end
 
   def gets_email(prompt, required: true)
-    print prompt
+    print prompt.custom_colorize
     input = gets.chomp.strip
     regex_email = /\A[^@\s]+@[^@\s]+\z/
     if required
       while input.empty? || regex_email.match(input).nil?
         puts
-        puts "Can't be blank" if input.empty?
-        puts "Incorrect format email: user@mail.com" if regex_email.match(input).nil?
-        print prompt
+        puts "Can't be blank".red if input.empty?
+        puts "Incorrect format email: user@mail.com".red if regex_email.match(input).nil?
+        print prompt.custom_colorize
         input = gets.chomp.strip
       end
     end
@@ -93,14 +93,14 @@ module Requester
   end
 
   def gets_password(prompt, required: true, length: 6)
-    print prompt
+    print prompt.custom_colorize
     input = $stdin.noecho(&:gets).chomp.strip
     if required
       while input.empty? || input.size < length
         puts
-        puts "Can't be blank" if input.empty?
-        puts "Minimium length of #{length}" if input.size < length
-        print prompt
+        puts "Can't be blank".red if input.empty?
+        puts "Minimium length of #{length}".red if input.size < length
+        print prompt.custom_colorize
         input = $stdin.noecho(&:gets).chomp.strip
       end
     end
@@ -125,18 +125,33 @@ module Requester
   end
 
   def gets_option(prompt, options, required: true)
-    puts prompt
-    print "> "
+    puts prompt.custom_colorize
+    print "> ".custom_colorize
     input = gets.chomp.split.map(&:strip)
     comand = input[0]
     if required || !input.empty?
       until options.include? comand
-        puts "Invalid option"
-        print "> "
+        puts "Invalid option".red
+        print "> ".custom_colorize
         input = gets.chomp.split.map(&:strip)
         comand = input[0]
       end
     end
+    input
+  end
+
+  def gets_date(prompt, required: true)
+    print prompt.custom_colorize
+    input = gets.chomp.strip
+    return input if input.empty? && !required
+
+    until input.match?(/^2\d\d\d-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1]$)/)
+      puts input.empty? ? "Cannot be empty".red : "Must match 2yyy-mm-dd".red
+      print prompt.custom_colorize
+      input = gets.chomp.strip
+      return input if input.empty? && !required
+    end
+
     input
   end
 end
