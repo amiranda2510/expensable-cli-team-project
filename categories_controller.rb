@@ -46,8 +46,6 @@ class CategoriesController
     response = delete("/categories/#{id}", options)
     error_message = "Category Not Found"
     raise Net::HTTPError.new(error_message, response) unless response.success?
-
-    JSON.parse(response.body, symbolize_names: true)
   end
 
   def self.raise_and_send_response(response)

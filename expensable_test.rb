@@ -13,7 +13,7 @@ class ExpensableTest < Minitest::Test
   def test_create_category
     login_data = { email: "test10@mail.com", password: "123456" }
     user = SessionController.login(login_data)
-    create_data = { name: "test name", transaction_type: "income" }
+    create_data = { name: rand(100_000).to_s, transaction_type: "income" }
     response = CategoriesController.create(user[:token], create_data)
     assert_equal response[:name], create_data[:name]
     assert_equal response[:transaction_type], create_data[:transaction_type]

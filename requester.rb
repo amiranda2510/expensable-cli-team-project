@@ -12,8 +12,8 @@ module Requester
   end
 
   def select_menu_expenses_action
-    prompt = "create | show ID | update ID | delete ID
-    add-to ID | toggle | next | prev | logout"
+    prompt = "create | show ID | update ID | delete ID\n"\
+             "add-to ID | toggle | next | prev | logout"
     options = %w[create show update delete add-to toggle next prev logout]
     gets_option(prompt, options)
   end
