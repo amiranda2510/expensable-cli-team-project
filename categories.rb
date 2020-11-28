@@ -38,7 +38,11 @@ module Categories
       input = select_transaction_option
       break if input.first == "back"
 
-      execute_option(*input) # input may be [option] or [option, id]
+      begin
+        execute_option(*input) # input may be [option] or [option, id]
+      rescue Net::HTTPError => e
+        puts "\n\n#{e}\n\n".red
+      end
     end
   end
 

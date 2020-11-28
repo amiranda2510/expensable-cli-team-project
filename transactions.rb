@@ -50,19 +50,16 @@ module Transactions
 
   def transaction_form(update_form: false)
     amount = update_form ? gets_string("Amount: ", required: false) : gets_string("Amount: ")
-    # NEEDS validation for date
-    date = update_form ? gets_string("Date: ", required: false) : gets_string("Date: ")
+    date = update_form ? gets_date("Date: ", required: false) : gets_date("Date: ")
     notes = gets_string("Notes: ", required: false)
 
     transaction_info = {}
-    transaction_info[:amount] = amount unless notes.empty?
-    transaction_info[:date] = date unless notes.empty?
+    transaction_info[:amount] = amount unless amount.empty?
+    transaction_info[:date] = date unless date.empty?
 
     # transaction[:notes] are nil if notes is empty when form is update_form
     transaction_info[:notes] = notes unless update_form && notes.empty?
-    # NEEDS to create @category_id somewhere
     transaction_info[:category_id] = @category_id
-
     transaction_info # returned
   end
 end

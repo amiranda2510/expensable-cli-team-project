@@ -123,4 +123,19 @@ module Requester
     end
     input
   end
+
+  def gets_date(prompt, required: true)
+    print prompt.custom_colorize
+    input = gets.chomp.strip
+    return input if input.empty? && !required
+
+    until input.match?(/^2\d\d\d-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1]$)/)
+      puts input.empty? ? "Cannot be empty".red : "Must match 2yyy-mm-dd".red
+      print prompt.custom_colorize
+      input = gets.chomp.strip
+      return input if input.empty? && !required
+    end
+
+    input
+  end
 end
