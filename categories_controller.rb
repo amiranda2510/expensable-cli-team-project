@@ -44,12 +44,16 @@ class CategoriesController
       headers: { authorization: "Token token=#{token}" }
     }
     response = delete("/categories/#{id}", options)
-    raise_and_send_response(response)
+    error_message = "Category Not Found"
+    raise Net::HTTPError.new(error_message, response) unless response.success?
+
+    JSON.parse(response.body, symbolize_names: true)
   end
 
   def self.raise_and_send_response(response)
-    raise Net::HTTPError.new(response.message, response) unless response.success?
+    response_body = JSON.parse(response.body, symbolize_names: true)
+    raise Net::HTTPError.new(response_body[:errors].join, response) unless response.success?
 
-    JSON.parse(response.body, symbolize_names: true) if response.body
+    response_body
   end
 end
