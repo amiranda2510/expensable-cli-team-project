@@ -1,4 +1,5 @@
 require_relative "presenter"
+require "io/console"
 
 module Requester
   include Presenter
@@ -28,7 +29,7 @@ module Requester
   def user_form
     # NEEDS VALIDATION
     email = gets_string("Email: ")
-    password = gets_string("Password: ", length: 6)
+    password = gets_string("Password: ", length: 8)
     first_name = gets_string("First name: ")
     last_name = gets_string("Last name: ")
     phone = gets_string("Phone: ")
@@ -42,8 +43,8 @@ module Requester
   end
 
   def login_form
-    email = gets_string("Email: ")
-    password = gets_string("Password: ")
+    email = gets_email("Email: ")
+    password = gets_password("Password: ", required: true, length: 8)
     { email: email, password: password }
   end
 
@@ -71,6 +72,37 @@ module Requester
         puts "Minimium length of #{length}" if input.size < length
         print prompt
         input = gets.chomp.strip
+      end
+    end
+    input
+  end
+
+  def gets_email(prompt, required: true)
+    print prompt
+    input = gets.chomp.strip
+    regex_email = /\A[^@\s]+@[^@\s]+\z/
+    if required
+      while input.empty? || regex_email.match(input).nil?
+        puts
+        puts "Can't be blank" if input.empty?
+        puts "Incorrect format email /user@mail.com/ " if regex_email.match(input).nil?
+        print prompt
+        input = gets.chomp.strip
+      end
+    end
+    input
+  end
+
+  def gets_password(prompt, required: true, length: 6)
+    print prompt
+    input = $stdin.noecho(&:gets).chomp.strip
+    if required
+      while input.empty? || input.size < length
+        puts
+        puts "Can't be blank" if input.empty?
+        puts "Minimium length of #{length}" if input.size < length
+        print prompt
+        input = $stdin.noecho(&:gets).chomp.strip
       end
     end
     input
