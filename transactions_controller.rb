@@ -2,13 +2,13 @@ require "httparty"
 require "json"
 
 class TransactionsController
-  require HTTParty
+  include HTTParty
   base_uri "https://expensable-api.herokuapp.com"
 
   def self.create(user, transaction_info)
     # created transaction hash is returned
     request = {
-      "headers": { "Content-Type": "application/json", "Authorization": "Token token=#{user.token}" },
+      "headers": { "Content-Type": "application/json", "Authorization": "Token token=#{user[:token]}" },
       "body": transaction_info.to_json
     }
     category_id = transaction_info[:category_id]

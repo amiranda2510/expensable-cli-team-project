@@ -38,7 +38,7 @@ module Transactions
   # requester
 
   def transaction_form(update_form: false)
-    amount = update_form ? gets_string("Amount: ", required: false) : get_string("Amount: ")
+    amount = update_form ? gets_string("Amount: ", required: false) : gets_string("Amount: ")
     # NEEDS validation for date
     date = update_form ? gets_string("Amount: ", required: false) : gets_string("Date: ")
     notes = gets_string("Notes: ", required: false)
