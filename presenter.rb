@@ -5,8 +5,8 @@ require "colorize"
 class String
   def custom_colorize
     gsub!(/[|>:+#-]/, &:cyan)
-    gsub!(/ID|/i, &:yellow)
-    gsub!(/delete|for|to/, &:light_magenta)
+    gsub!(/ID|/, &:yellow)
+    gsub!(/\b(delete|for|to)\b/, &:light_magenta)
     gsub!(/exit|\b\w*(?=\()|(?<![\[;])\d*(?![m;])/, &:red) # => any number not inside an enclosing eg \e[;0m0m;2]
     self
   end

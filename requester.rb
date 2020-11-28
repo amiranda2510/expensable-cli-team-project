@@ -115,7 +115,7 @@ module Requester
     comand = input[0]
     if required || !input.empty?
       until options.include? comand
-        puts "Invalid option".custom_colorize
+        puts "Invalid option".red
         print "> ".custom_colorize
         input = gets.chomp.split.map(&:strip)
         comand = input[0]
