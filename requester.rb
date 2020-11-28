@@ -44,7 +44,7 @@ module Requester
 
   def login_form
     email = gets_email("Email: ")
-    password = gets_password("Password: ", required: true, length: 8)
+    password = gets_password("Password: ", required: true, length: 6)
     { email: email, password: password }
   end
 
