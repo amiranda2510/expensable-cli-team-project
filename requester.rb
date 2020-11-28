@@ -32,7 +32,7 @@ module Requester
     password = gets_string("Password: ", length: 6)
     first_name = gets_string("First name: ", required: false)
     last_name = gets_string("Last name: ", required: false)
-    phone = gets_phone("Phone: ", required: false)
+    phone = gets_phone("Phone: ")
     {
       email: email,
       password: password,

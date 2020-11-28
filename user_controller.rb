@@ -10,6 +10,7 @@ class UserController
       "headers": { "Content-Type": "application/json" },
       "body": new_user.to_json
     }
+    p new_user
     response = post("/signup", request)
     raise_and_send_response(response)
   end
